@@ -1,0 +1,11 @@
+extends layout
+
+block body
+  div(ng-controller='sceneCtrl')
+    div(style='width:100%, display:block')
+      div(scene style='float:left')
+  
+  // Include this outside Browserify since it's served by node.js and angular-socket-io needs the client lib from it.
+  script(src='/socket.io/socket.io.js')
+  script(src='js/bundle.js')
+
