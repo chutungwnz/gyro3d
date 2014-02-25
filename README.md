@@ -1,1 +1,1 @@
-![Connections](harrio.github.com/harrio.github.io/img/gy521.jpg)
+![Connections](harrio.github.io/img/gy521.jpg)
