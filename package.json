@@ -34,6 +34,7 @@
     "gulp-livereload": "~0.2.0",
     "bower": "~1.2.8",
     "gulp": "~3.5.2",
-    "typeify": "~0.1.1"
+    "typeify": "~0.1.1",
+    "gulp-clean": "~0.2.4"
   }
 }
