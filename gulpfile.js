@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var browserify = require('gulp-browserify');
 var rename = require('gulp-rename');
 var typescript = require('gulp-tsc');
-//var jade = require('gulp-jade');
+var clean = require('gulp-clean');
 
 var paths = {
   scripts: ['src/ts/client/**/*.ts']
@@ -34,7 +34,7 @@ var brConfig = {
 
 gulp.task('compileClient', function(){
   gulp.src(['src/ts/client/**/*.ts', 'src/ts/client/directives/*.ts'])
-    .pipe(typescript({ emitError: false }))
+    .pipe(typescript())
     .pipe(gulp.dest('tmp/'));
 });
 
@@ -47,7 +47,7 @@ var browserifier = function() {
 
 gulp.task('compileServer', function(){
   gulp.src(['src/ts/server/**/*.ts'])
-    .pipe(typescript({ emitError: false }))
+    .pipe(typescript())
     .pipe(gulp.dest('./build'));
 });
 
@@ -57,13 +57,28 @@ gulp.task('compileJade', function() {
     .pipe(gulp.dest('public/views/'));
 });
 
+gulp.task('cleanTmp', function() {
+    gulp.src('tmp', {read: false})
+        .pipe(clean());
+});
+
+gulp.task('cleanTscTmp', function() {
+    gulp.src('gulp-tsc-tmp*', {read: false})
+        .pipe(clean());
+});
+
+gulp.task('cleanBundle', function() {
+    gulp.src('public/js/bundle.js', {read: false})
+        .pipe(clean());
+});
+
 gulp.task('scripts', browserifier);
  
 gulp.task('watch', function () {
   gulp.watch(paths.scripts, ['compile', 'scripts']);
 });
  
-gulp.task('default', ['compileClient', 'scripts', 'compileServer', 'compileJade']);
+gulp.task('default', ['cleanTscTmp', 'cleanBundle', 'compileClient', 'scripts', 'compileServer', 'compileJade']);
 
 
 
